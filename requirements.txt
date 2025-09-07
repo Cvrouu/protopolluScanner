@@ -1,0 +1,13 @@
+## 🚀 Prerequisites
+
+- **Python 3.x**
+- Python modules:
+  - `requests`
+  - `colorama`
+  - `argparse`
+
+### Installing the modules
+
+```bash
+pip install requests colorama
+```

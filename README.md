@@ -1,59 +1,72 @@
-Scanner Prototype Pollution
+# Prototype Pollution Scanner
 
-Ce projet est un petit script Python pour tester la vulnérabilité Prototype Pollution sur des applications web. L’idée, c’est de pouvoir scanner une URL ou plusieurs URLs avec des payloads JSON et voir si l’application est vulnérable.
+This project is a Python script for testing **Prototype Pollution** vulnerabilities in web applications.  
+It scans one or more URLs by dynamically injecting gadgets into JSON payloads to detect potential vulnerabilities.
 
-Prérequis
+---
 
-Python 3.x
+## 🛠️ Usage
 
-Modules Python : requests, colorama, argparse
+### Scanning a single URL
 
-Pour installer les modules :
-
-pip install requests colorama
-
-Utilisation
-Scanner une seule URL
+```bash
 python scanner.py -u https://exemple.com
+```
 
-Scanner plusieurs URLs via un fichier
+### Scan multiple URLs via a file
 
-Créez un fichier texte (urls.txt) avec une URL par ligne.
+Create a text file (`urls.txt`) with one URL per line.
 
+```bash
 python scanner.py -f urls.txt
+```
 
-Utiliser un fichier de payloads personnalisé
+### Use a custom gadget file
 
-Par défaut, le script utilise payloads.json.
+Create a text file (`gadgets.txt`) with one gadget per line.
 
-python scanner.py -u https://exemple.com -p mes_payloads.json
+```bash
+python scanner.py -u https://exemple.com -g gadgets.txt
+```
 
-Fonctionnalités
+---
 
-Scanner une ou plusieurs URLs
+## ⚙️ Features
 
-Vérifier si elles sont vulnérables à Prototype Pollution avec les payloads fournis
+- Scan one or more URLs
+- Dynamic generation of payloads from known gadgets and pollution paths
+- Automatic detection of prototype pollution
+- Detailed results for each URL and gadget tested
 
-Prévu dans une future version : test de gadgets personnalisés pour certaines applications
+---
 
-Limitations
+## ⚠️ Limitations
 
-Les gadgets personnalisés ne sont pas encore gérés.
+- Results are not yet saved automatically
+- Detection relies on the presence of the gadget in the response (to be adapted according to the target application)
+- The script does not automatically guess the gadgets used by the application
 
-Les résultats ne sont pas sauvegardés automatiquement (pas encore implémenté).
+---
 
-Exemple de sortie
-Voici l'URL à tester : ['https://exemple.com']
-Et ça c'est les payloads je suppose : ['payload1', 'payload2']
+## 📝 Example output
 
-Contribution
+```
+Here is the list of URLs to test: [‘https://exemple.com’]
+Here are your gadgets: [‘isAdmin’, ‘toString’, ...]
+Gadget ‘isAdmin’ via ‘__proto__’ seems to have an effect on https://exemple.com!
+Gadget ‘toString’ via ‘constructor.prototype’ has no visible effect on https://exemple.com.
+[Results(url=‘https://exemple.com’, vuln=True, gadgets=[‘isAdmin’])]
+```
 
-C’est un projet perso donc pour l’instant contributions ouvertes juste pour test/feedback.
+---
 
-Fork le repo si tu veux jouer avec
+## 🤝 Contribution
 
-Tu peux proposer des améliorations via Pull Request
+- Contributions, tests, and feedback are welcome!
+- Fork the repo and suggest your improvements via Pull Request.
 
-Licence
+---
 
-Projet perso, pas de licence particulière pour le moment.
+## 📄 License
+
+Personal project, no specific license
